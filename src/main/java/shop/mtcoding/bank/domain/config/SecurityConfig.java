@@ -1,5 +1,6 @@
 package shop.mtcoding.bank.domain.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +13,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import shop.mtcoding.bank.domain.user.UserEnum;
+import shop.mtcoding.bank.dto.ResponseDto;
+import shop.mtcoding.bank.util.CustomResponseUtil;
 
 @Configuration //설정파일 Bean 등록
 public class SecurityConfig {
@@ -45,6 +48,14 @@ public class SecurityConfig {
 
         //httpBasic은 브라우저가 팝업창을 이용해서 사용자 인증을 진행 한다. , disable 설정
         http.httpBasic().disable();
+        
+        //Exception 가로채기
+        //Spring ExceptionFilter 에서 처리하는 Error 를 편하게 관리하도록 통합 하여 사용
+        http.exceptionHandling().authenticationEntryPoint(
+                (request, response, authException) -> {
+                    CustomResponseUtil.unAuthentication(response, "로그인을 진행해야 합니다.");
+                }
+        );
 
         http.authorizeRequests()
                 .antMatchers("/api/s/**").authenticated() //s가 붙은 API는 인증 해야 한다.
