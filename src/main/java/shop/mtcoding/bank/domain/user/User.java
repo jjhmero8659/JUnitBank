@@ -43,6 +43,12 @@ public class User { //extends 시간설정 (상속)
     @Column(nullable = false)
     private LocalDateTime updateAt;
 
+    @PrePersist
+    private void setInitTime(){
+        createdAt = LocalDateTime.now();
+        updateAt = LocalDateTime.now();
+    }
+
     @Builder
     public User(Long id, String username, String password, String email, String fullname, UserEnum role, LocalDateTime createdAt, LocalDateTime updateAt) {
         this.id = id;
