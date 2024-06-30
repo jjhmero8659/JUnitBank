@@ -1,4 +1,4 @@
-package shop.mtcoding.bank.domain.config.auth;
+package shop.mtcoding.bank.config.auth;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ public class LoginUser implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(()->"ROLE_" + user.getRole());
+        authorities.add(() -> "ROLE_" + user.getRole());
         return authorities;
     }
 
@@ -33,17 +33,17 @@ public class LoginUser implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override

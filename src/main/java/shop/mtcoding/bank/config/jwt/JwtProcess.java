@@ -1,11 +1,11 @@
-package shop.mtcoding.bank.domain.config.jwt;
+package shop.mtcoding.bank.config.jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import shop.mtcoding.bank.domain.config.auth.LoginUser;
+import shop.mtcoding.bank.config.auth.LoginUser;
 import shop.mtcoding.bank.domain.user.User;
 import shop.mtcoding.bank.domain.user.UserEnum;
 

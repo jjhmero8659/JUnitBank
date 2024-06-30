@@ -1,4 +1,4 @@
-package shop.mtcoding.bank.domain.config.auth;
+package shop.mtcoding.bank.config.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;

@@ -13,6 +13,15 @@ import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 public class UserReqDto {
+    
+    //Controller 에서 검증 전 작업이 이뤄지기 때문에 Validate 불가능
+    @Getter
+    @Setter
+    public static class LoginReqDto{
+        private String username;
+        private String password;
+    }
+    
     @Setter
     @Getter
     public static class JoinReqDto {

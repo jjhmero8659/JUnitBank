@@ -1,4 +1,4 @@
-package shop.mtcoding.bank.domain.config.jwt;
+package shop.mtcoding.bank.config.jwt;
 
 /*
 Secret 키는 노출되면 안된다. (클라우드 ARS - 환경변수, 파일에 있는 것을 읽을 수도 있고!!)
