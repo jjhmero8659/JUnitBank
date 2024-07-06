@@ -22,6 +22,7 @@ public class JwtProcess {
                 .withClaim("id", loginUser.getUser().getId())
                 .withClaim("role", loginUser.getUser().getRole().name()) //ENUM 타입
                 .sign(Algorithm.HMAC512(JwtVO.SECRET));
+
         return JwtVO.TOKEN_PREFIX + jwtToken;
     }
     
@@ -32,7 +33,11 @@ public class JwtProcess {
         Long id = decodedJWT.getClaim("id").asLong();
         String role = decodedJWT.getClaim("role").asString();
 
-        User user = User.builder().id(id).role(UserEnum.valueOf(role)).build();
+        User user = User.builder()
+                .id(id)
+                .role(UserEnum.valueOf(role))
+                .build();
+
         LoginUser loginUser = new LoginUser(user);
         return loginUser;
     }

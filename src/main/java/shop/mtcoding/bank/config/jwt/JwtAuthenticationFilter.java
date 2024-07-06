@@ -42,11 +42,16 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         log.info("디버그 : attemptAuthentication 호출됨");
         try {
             ObjectMapper om = new ObjectMapper();
-            UserReqDto.LoginReqDto loginReqDto = om.readValue(request.getInputStream(), UserReqDto.LoginReqDto.class);
+            UserReqDto.LoginReqDto loginReqDto = om.readValue(
+                    request.getInputStream(),
+                    UserReqDto.LoginReqDto.class
+            );
 
             // 강제 로그인
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                    loginReqDto.getUsername(), loginReqDto.getPassword());
+                    loginReqDto.getUsername(),
+                    loginReqDto.getPassword()
+            );
 
             // UserDetailsService의 loadUserByUsername 호출
             // JWT를 쓴다 하더라도, 컨트롤러 진입을 하면 시큐리티의 권한체크, 인증체크의 도움을 받을 수 있게 세션을 만든다.
