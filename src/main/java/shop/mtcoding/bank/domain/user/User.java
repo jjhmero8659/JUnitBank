@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -35,22 +36,18 @@ public class User { //extends 시간설정 (상속)
     @Column(nullable = false)
     private UserEnum role; //ADMIN , CUSTOMER
 
-    @CreatedDate //Insert
+    @CreatedDate // Insert
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
-    @LastModifiedBy //Insert, Update
+    @LastModifiedDate // Insert, Update
     @Column(nullable = false)
-    private LocalDateTime updateAt;
+    private LocalDateTime updatedAt;
 
-    @PrePersist
-    private void setInitTime(){
-        createdAt = LocalDateTime.now();
-        updateAt = LocalDateTime.now();
-    }
 
     @Builder
-    public User(Long id, String username, String password, String email, String fullname, UserEnum role, LocalDateTime createdAt, LocalDateTime updateAt) {
+
+    public User(Long id, String username, String password, String email, String fullname, UserEnum role, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -58,6 +55,6 @@ public class User { //extends 시간설정 (상속)
         this.fullname = fullname;
         this.role = role;
         this.createdAt = createdAt;
-        this.updateAt = updateAt;
+        this.updatedAt = updatedAt;
     }
 }

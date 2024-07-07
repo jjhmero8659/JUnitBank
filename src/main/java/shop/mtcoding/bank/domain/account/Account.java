@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import shop.mtcoding.bank.domain.user.User;
 
@@ -21,7 +22,7 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false, length = 20)
+    @Column(unique = true, nullable = false, length = 4)
     private Long number; //계좌 번호
 
     @Column(nullable = false, length = 4)
@@ -36,22 +37,23 @@ public class Account {
     @ManyToOne(fetch = FetchType.LAZY) //지연로딩
     private User user;
 
-    @CreatedDate //Insert
+    @CreatedDate // Insert
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
-    @LastModifiedBy //Insert, Update
+    @LastModifiedDate // Insert, Update
     @Column(nullable = false)
-    private LocalDateTime updateAt;
+    private LocalDateTime updatedAt;
+
 
     @Builder
-    public Account(Long id, Long number, Long password, Long balance, User user, LocalDateTime createdAt, LocalDateTime updateAt) {
+    public Account(Long id, Long number, Long password, Long balance, User user, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.number = number;
         this.password = password;
         this.balance = balance;
         this.user = user;
         this.createdAt = createdAt;
-        this.updateAt = updateAt;
+        this.updatedAt = updatedAt;
     }
 }
