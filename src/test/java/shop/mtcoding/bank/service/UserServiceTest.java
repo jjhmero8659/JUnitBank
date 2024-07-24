@@ -3,8 +3,6 @@ package shop.mtcoding.bank.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -18,9 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import shop.mtcoding.bank.config.dummy.DummyObject;
 import shop.mtcoding.bank.domain.user.User;
 import shop.mtcoding.bank.domain.user.UserRepository;
-import shop.mtcoding.bank.domain.user.dto.user.UserReqDto;
 import shop.mtcoding.bank.domain.user.dto.user.UserReqDto.JoinReqDto;
-import shop.mtcoding.bank.domain.user.dto.user.UserRespDto;
 import shop.mtcoding.bank.domain.user.dto.user.UserRespDto.JoinRespDto;
 
 

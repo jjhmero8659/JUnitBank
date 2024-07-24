@@ -15,6 +15,7 @@ import org.springframework.security.authentication.InternalAuthenticationService
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,12 +33,16 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
         setFilterProcessesUrl("/api/login");
+        log.debug("디버그 : /api/login 인증 엔드포인트 설정");
         this.authenticationManager = authenticationManager;
     }
 
     // Post : /api/login
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
+    public Authentication attemptAuthentication(
+            HttpServletRequest request,
+            HttpServletResponse response
+    )
             throws AuthenticationException {
         log.info("디버그 : attemptAuthentication 호출됨");
         try {
@@ -56,6 +61,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             // UserDetailsService의 loadUserByUsername 호출
             // JWT를 쓴다 하더라도, 컨트롤러 진입을 하면 시큐리티의 권한체크, 인증체크의 도움을 받을 수 있게 세션을 만든다.
             // 이 세션의 유효기간은 request하고, response하면 끝!!
+
+            log.info("[INFO] AuthenticationManager : Start");
             Authentication authentication = authenticationManager.authenticate(authenticationToken);
 
             return authentication;

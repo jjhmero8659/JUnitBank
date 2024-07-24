@@ -1,5 +1,7 @@
 package shop.mtcoding.bank.config.jwt;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,6 +17,8 @@ import java.io.IOException;
 
 //모든 주소에서 동작함 (토큰 검증)
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
+
+    private final Logger log = LoggerFactory.getLogger(getClass());
     public JwtAuthorizationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
     }
@@ -40,8 +44,9 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            
+            log.info("SecurityContextHolder 유저 정보 등록 : {}" , authentication);
         }
+
         chain.doFilter(request,response); //필터가 없으면 Controller 로 이동
     }
 

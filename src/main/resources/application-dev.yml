@@ -28,5 +28,6 @@ spring:
 
 logging:
   level:
-    '[shop.mtcoding.bank]': DEBUG
+    '[shop.mtcoding.bank]': TRACE
     '[org.hibernate.type]': TRACE
+    org.springframework.security: TRACE

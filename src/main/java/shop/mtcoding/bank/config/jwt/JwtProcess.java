@@ -39,6 +39,7 @@ public class JwtProcess {
                 .build();
 
         LoginUser loginUser = new LoginUser(user);
+
         return loginUser;
     }
 }
